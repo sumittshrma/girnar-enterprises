@@ -9,27 +9,12 @@ import {
   CheckCircle,
   Shield,
   Truck,
-  Filter,
-  Calendar,
-  Home,
-  Info,
-  Package,
   Award,
   Mail,
   MapPin,
   ChevronDown,
   Star,
-  Quote,
-  // Use these icons instead of Facebook, Instagram, Twitter, Youtube
-  // They've been renamed in newer versions of lucide-react
 } from 'lucide-react';
-
-// For social media icons, we'll use these alternatives or create custom ones
-// Since Facebook, Instagram, Twitter, Youtube are not available, we'll use:
-// - Facebook: Use 'Globe' or create custom
-// - Instagram: Use 'Camera' or create custom  
-// - Twitter: Use 'Bird' or create custom (X logo)
-// - Youtube: Use 'Play' or create custom
 
 // --- Types ---
 interface Product {
@@ -777,8 +762,6 @@ const TestimonialsFAQ: React.FC = () => {
 
 // Footer
 const Footer: React.FC = () => {
-  // Using simple text-based social media links since lucide-react doesn't export Facebook/Instagram/Twitter/Youtube
-  // You can install react-icons if you want proper icons: npm install react-icons
   return (
     <footer className="bg-slate-800 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -790,11 +773,10 @@ const Footer: React.FC = () => {
             </div>
             <p className="text-sm text-slate-300 mt-3">Pure, refreshing, and safe drinking water for all.</p>
             <div className="flex gap-4 mt-4">
-              {/* Social media links without icons - using text labels */}
-              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">FB</a>
-              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">IG</a>
-              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">X</a>
-              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">YT</a>
+              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">FB</a>
+              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">IG</a>
+              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">X</a>
+              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">YT</a>
             </div>
           </div>
           <div>
