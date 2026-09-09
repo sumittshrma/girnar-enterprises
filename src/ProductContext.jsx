@@ -1,5 +1,5 @@
 // src/ProductContext.jsx
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const ProductContext = createContext();
 
@@ -54,13 +54,38 @@ const initialProducts = [
   },
 ];
 
+// Load products from localStorage or use initial
+const loadProductsFromStorage = () => {
+  try {
+    const stored = localStorage.getItem('girnar_products');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (parsed && parsed.length > 0) {
+        return parsed;
+      }
+    }
+    return initialProducts;
+  } catch (error) {
+    console.error('Error loading products from localStorage:', error);
+    return initialProducts;
+  }
+};
+
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState(loadProductsFromStorage);
+
+  // Save to localStorage whenever products change
+  useEffect(() => {
+    try {
+      localStorage.setItem('girnar_products', JSON.stringify(products));
+    } catch (error) {
+      console.error('Error saving products to localStorage:', error);
+    }
+  }, [products]);
 
   const addProduct = async (newProduct, imageFile) => {
     let imageUrl = newProduct.image || '';
     
-    // If there's an image file, convert to base64
     if (imageFile) {
       imageUrl = await fileToBase64(imageFile);
     }
@@ -79,7 +104,6 @@ export const ProductProvider = ({ children }) => {
   const updateProduct = async (updatedProduct, imageFile) => {
     let imageUrl = updatedProduct.image;
     
-    // If there's a new image file, convert to base64
     if (imageFile) {
       imageUrl = await fileToBase64(imageFile);
     }
