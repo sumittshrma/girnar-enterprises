@@ -1,3 +1,4 @@
+// src/App.jsx - Complete with Login Integration
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -14,50 +15,25 @@ import {
   MapPin,
   ChevronDown,
   Star,
+  Settings as SettingsIcon,
 } from 'lucide-react';
+import Admin from './Admin';
+import Login from './Login';
+import { useProducts } from './ProductContext';
 
-// --- Data ---
-const products = [
-  {
-    id: 'event-cup',
-    name: 'Event Cup',
-    capacity: '200ml / 250ml',
-    description: 'Perfect for events, meetings, and corporate gatherings. Our event cups are designed for convenience and hygiene with secure sealing.',
-    image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=400&fit=crop&crop=center&auto=format',
-    badge: 'Bulk Order',
-  },
-  {
-    id: 'portable-bottle',
-    name: 'Portable Bottle',
-    capacity: '500ml / 1L',
-    description: 'Convenient for travel, gym, and daily hydration. Made with BPA-free material for your safety and health.',
-    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop&crop=center&auto=format',
-  },
-  {
-    id: 'water-jar',
-    name: 'Water Jar',
-    capacity: '20 Liters',
-    description: 'Ideal for homes, offices, and commercial spaces. Our 20L jars come with a secure seal for lasting freshness.',
-    image: 'https://images.unsplash.com/photo-1616118132534-3812ab0f62c2?w=400&h=400&fit=crop&crop=center&auto=format',
-    badge: 'Subscription Available',
-  },
-];
-
+// FAQs data
 const faqs = [
   {
     question: 'What is the minimum order quantity?',
-    answer: 'For home delivery, the minimum order is 2 water bottle crates. For events, we offer custom bulk packaging starting from 50 cups.',
+    answer: 'For home delivery, the minimum order is 2 water bottle crates.',
   },
   {
     question: 'How long does delivery take?',
     answer: 'We deliver within 24-48 hours in serviceable areas. Express delivery is available for urgent orders.',
   },
-  {
-    question: 'Is there a security deposit for jars?',
-    answer: 'Yes, a refundable deposit of ₹100 per jar is applicable, which will be returned upon return of the jar.',
-  },
 ];
 
+// Testimonials data
 const testimonials = [
   {
     name: 'Priya Sharma',
@@ -82,7 +58,7 @@ const testimonials = [
 // --- Components ---
 
 // Header / Navbar
-const Header = () => {
+const Header = ({ onAdminClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks = ['Home', 'About Us', 'Products', 'Quality Process', 'Contact Us'];
 
@@ -118,6 +94,13 @@ const Header = () => {
 
           {/* CTA & Mobile Menu Button */}
           <div className="flex items-center space-x-4">
+            <button
+              onClick={onAdminClick}
+              className="hidden md:inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-slate-200/50"
+            >
+              <SettingsIcon className="h-4 w-4" />
+              Admin
+            </button>
             <a
               href="https://wa.me/919542163369"
               target="_blank"
@@ -158,6 +141,15 @@ const Header = () => {
                   {link}
                 </a>
               ))}
+              <button
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onAdminClick();
+                }}
+                className="block w-full text-left text-slate-700 hover:text-cyan-700 font-medium transition-colors"
+              >
+                Admin Panel
+              </button>
               <a
                 href="https://wa.me/919542163369"
                 target="_blank"
@@ -175,7 +167,7 @@ const Header = () => {
   );
 };
 
-// Hero Section - Fixed with proper contact link
+// Hero Section
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-cyan-50/30 to-white">
@@ -205,7 +197,6 @@ const Hero = () => {
               purest water delivered to your doorstep.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
-              {/* Enquire Now button - properly linked to contact section */}
               <a
                 href="#contact-us"
                 className="inline-flex items-center gap-2 bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-cyan-200/50"
@@ -320,8 +311,9 @@ const USP = () => {
   );
 };
 
-// Products Section with Modal
+// Products Section with Modal - Using ProductContext
 const Products = () => {
+  const { products } = useProducts();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -378,7 +370,6 @@ const Products = () => {
                 <p className="text-sm text-cyan-700 font-medium">{product.capacity}</p>
                 <p className="text-slate-600 mt-2 text-sm line-clamp-2">{product.description}</p>
                 
-                {/* Read More Button */}
                 <button
                   onClick={() => openModal(product)}
                   className="mt-4 w-full bg-transparent border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-600 hover:text-white px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
@@ -396,12 +387,12 @@ const Products = () => {
           <div className="bg-gradient-to-r from-cyan-100/40 to-cyan-50/60 backdrop-blur-sm p-6 rounded-2xl border border-cyan-200/30 text-center md:text-left">
             <h4 className="text-xl font-bold text-slate-800">Bulk / Party Orders</h4>
             <p className="text-slate-600">Custom packaging for events, weddings, and corporate functions.</p>
-            <a href="#contact" className="inline-block mt-3 text-cyan-700 font-medium hover:underline">Contact us</a>
+            <a href="#contact-us" className="inline-block mt-3 text-cyan-700 font-medium hover:underline">Contact us</a>
           </div>
           <div className="bg-gradient-to-r from-emerald-100/40 to-emerald-50/60 backdrop-blur-sm p-6 rounded-2xl border border-emerald-200/30 text-center md:text-left">
             <h4 className="text-xl font-bold text-slate-800">Monthly Subscription</h4>
             <p className="text-slate-600">Never run out of water. Get regular deliveries at discounted rates.</p>
-            <a href="#contact" className="inline-block mt-3 text-emerald-700 font-medium hover:underline">Subscribe now</a>
+            <a href="#contact-us" className="inline-block mt-3 text-emerald-700 font-medium hover:underline">Subscribe now</a>
           </div>
         </div>
       </div>
@@ -469,9 +460,7 @@ const Products = () => {
                   </p>
                   <p className="text-slate-600 mt-3 text-sm leading-relaxed">
                     Our {selectedProduct.name.toLowerCase()} is manufactured with the highest quality standards, 
-                    ensuring purity and safety in every drop. Perfect for {selectedProduct.capacity.toLowerCase()} 
-                    requirements, this product is ideal for {selectedProduct.id === 'event-cup' ? 'events and gatherings' : 
-                    selectedProduct.id === 'portable-bottle' ? 'daily use and travel' : 'homes and offices'}.
+                    ensuring purity and safety in every drop.
                   </p>
                 </div>
 
@@ -487,7 +476,7 @@ const Products = () => {
                     Order on WhatsApp
                   </a>
                   <a
-                    href="#contact"
+                    href="#contact-us"
                     onClick={closeModal}
                     className="flex-1 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 px-6 py-3.5 rounded-full font-medium transition-all duration-300 border border-cyan-200 flex items-center justify-center gap-2"
                   >
@@ -525,13 +514,12 @@ const Products = () => {
   );
 };
 
-// Quality Process - Updated with 3 steps (removed 4th stage)
+// Quality Process
 const QualityProcess = () => {
   const steps = [
     { title: 'Sand & Carbon Filtration', desc: 'Removes impurities and sediments.' },
     { title: 'Reverse Osmosis (RO)', desc: 'High-pressure membrane filtration for purity.' },
     { title: 'UV Sterilization', desc: 'Eliminates bacteria and viruses.' },
-    // Removed: 'Ozonation & Mineral Fortification'
   ];
 
   return (
@@ -654,7 +642,7 @@ const About = () => {
   );
 };
 
-// Contact & WhatsApp Integration - Updated with manufacturing address
+// Contact & WhatsApp Integration
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', address: '', requirement: 'home' });
 
@@ -902,7 +890,7 @@ const TestimonialsFAQ = () => {
   );
 };
 
-// Footer - Updated with real business details
+// Footer
 const Footer = () => {
   return (
     <footer className="bg-slate-800 text-white py-12">
@@ -957,11 +945,49 @@ const Footer = () => {
   );
 };
 
-// Main App Component
+// Main App Component with Login Flow
 const App = () => {
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogin = (success) => {
+    if (success) {
+      setIsAuthenticated(true);
+      setShowAdmin(true);
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setShowAdmin(false);
+  };
+
+  // In App.jsx - Update the login section
+if (showAdmin) {
+  // If not authenticated, show login page with back button
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} onBack={() => setShowAdmin(false)} />;
+  }
+  
+  // If authenticated, show admin panel
+  return (
+    <div>
+      <Admin onLogout={handleLogout} />
+      <button
+        onClick={handleLogout}
+        className="fixed bottom-4 right-4 z-50 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg transition-colors flex items-center gap-2"
+      >
+        <X className="h-4 w-4" />
+        Exit Admin
+      </button>
+    </div>
+  );
+}
+
+  // Main Website
   return (
     <div className="font-sans antialiased">
-      <Header />
+      <Header onAdminClick={() => setShowAdmin(true)} />
       <Hero />
       <USP />
       <Products />
