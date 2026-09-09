@@ -16,30 +16,13 @@ import {
   Star,
 } from 'lucide-react';
 
-// --- Types ---
-interface Product {
-  id: string;
-  name: string;
-  capacity: string;
-  description: string;
-  price: string;
-  image: string;
-  badge?: string;
-}
-
-interface FAQ {
-  question: string;
-  answer: string;
-}
-
 // --- Data ---
-const products: Product[] = [
+const products = [
   {
     id: 'event-cup',
     name: 'Event Cup',
     capacity: '200ml / 250ml',
-    description: 'Perfect for events, meetings, and corporate gatherings.',
-    price: '₹10 / cup',
+    description: 'Perfect for events, meetings, and corporate gatherings. Our event cups are designed for convenience and hygiene with secure sealing.',
     image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=400&fit=crop&crop=center&auto=format',
     badge: 'Bulk Order',
   },
@@ -47,25 +30,23 @@ const products: Product[] = [
     id: 'portable-bottle',
     name: 'Portable Bottle',
     capacity: '500ml / 1L',
-    description: 'Convenient for travel, gym, and daily hydration.',
-    price: '₹25 / bottle',
+    description: 'Convenient for travel, gym, and daily hydration. Made with BPA-free material for your safety and health.',
     image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop&crop=center&auto=format',
   },
   {
     id: 'water-jar',
     name: 'Water Jar',
     capacity: '20 Liters',
-    description: 'Ideal for homes, offices, and commercial spaces.',
-    price: '₹80 / jar',
+    description: 'Ideal for homes, offices, and commercial spaces. Our 20L jars come with a secure seal for lasting freshness.',
     image: 'https://images.unsplash.com/photo-1616118132534-3812ab0f62c2?w=400&h=400&fit=crop&crop=center&auto=format',
     badge: 'Subscription Available',
   },
 ];
 
-const faqs: FAQ[] = [
+const faqs = [
   {
     question: 'What is the minimum order quantity?',
-    answer: 'For home delivery, the minimum order is 2 jars (20L each). For events, we offer custom bulk packaging starting from 50 cups.',
+    answer: 'For home delivery, the minimum order is 2 water bottle crates. For events, we offer custom bulk packaging starting from 50 cups.',
   },
   {
     question: 'How long does delivery take?',
@@ -101,7 +82,7 @@ const testimonials = [
 // --- Components ---
 
 // Header / Navbar
-const Header: React.FC = () => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks = ['Home', 'About Us', 'Products', 'Quality Process', 'Contact Us'];
 
@@ -118,7 +99,7 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Droplets className="h-8 w-8 text-cyan-600" fill="#0284C7" stroke="none" />
             <span className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
-              Girnar <span className="text-cyan-700">Enterprises</span>
+              Girnar <span className="text-cyan-700">Beverages</span>
             </span>
           </div>
 
@@ -138,7 +119,7 @@ const Header: React.FC = () => {
           {/* CTA & Mobile Menu Button */}
           <div className="flex items-center space-x-4">
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/919542163369"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-emerald-200/50"
@@ -178,7 +159,7 @@ const Header: React.FC = () => {
                 </a>
               ))}
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/919542163369"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all w-full justify-center"
@@ -194,8 +175,8 @@ const Header: React.FC = () => {
   );
 };
 
-// Hero Section
-const Hero: React.FC = () => {
+// Hero Section - Fixed with proper contact link
+const Hero = () => {
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-cyan-50/30 to-white">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMjg0QzciIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-40" />
@@ -224,11 +205,12 @@ const Hero: React.FC = () => {
               purest water delivered to your doorstep.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
+              {/* Enquire Now button - properly linked to contact section */}
               <a
-                href="#contact"
+                href="#contact-us"
                 className="inline-flex items-center gap-2 bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-cyan-200/50"
               >
-                Order Water Now
+                Enquire Now
               </a>
               <a
                 href="#products"
@@ -241,7 +223,7 @@ const Hero: React.FC = () => {
             <div className="flex flex-wrap gap-4 mt-8">
               <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-cyan-100">
                 <CheckCircle className="h-5 w-5 text-emerald-500" />
-                <span className="text-sm font-medium text-slate-700">7-Stage Filtered</span>
+                <span className="text-sm font-medium text-slate-700">Safety Tested Water</span>
               </div>
               <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-cyan-100">
                 <Award className="h-5 w-5 text-amber-500" />
@@ -280,12 +262,12 @@ const Hero: React.FC = () => {
 };
 
 // USP Section
-const USP: React.FC = () => {
+const USP = () => {
   const usps = [
     {
       icon: <Droplets className="h-8 w-8 text-cyan-700" />,
       title: 'Multi-Stage Purification',
-      description: 'RO + UV + Ozonated water with essential minerals for taste and health.',
+      description: 'RO + UV water with essential minerals for taste and health.',
     },
     {
       icon: <Shield className="h-8 w-8 text-cyan-700" />,
@@ -300,7 +282,7 @@ const USP: React.FC = () => {
   ];
 
   return (
-    <section id="about-us" className="py-20 bg-gradient-to-b from-white to-slate-50/50">
+    <section className="py-20 bg-gradient-to-b from-white to-slate-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -338,8 +320,23 @@ const USP: React.FC = () => {
   );
 };
 
-// Products Section
-const Products: React.FC = () => {
+// Products Section with Modal
+const Products = () => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = 'auto';
+    setTimeout(() => setSelectedProduct(null), 300);
+  };
+
   return (
     <section id="products" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -362,13 +359,13 @@ const Products: React.FC = () => {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl border border-cyan-100/40 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              className="bg-white rounded-2xl border border-cyan-100/40 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group"
             >
               <div className="relative h-56 bg-gradient-to-br from-cyan-50 to-white overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 {product.badge && (
                   <span className="absolute top-4 left-4 bg-cyan-700/90 text-white text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm">
@@ -379,18 +376,16 @@ const Products: React.FC = () => {
               <div className="p-6">
                 <h3 className="text-xl font-bold text-slate-800">{product.name}</h3>
                 <p className="text-sm text-cyan-700 font-medium">{product.capacity}</p>
-                <p className="text-slate-600 mt-1 text-sm">{product.description}</p>
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-lg font-bold text-slate-800">{product.price}</span>
-                  <a
-                    href="https://wa.me/919999999999"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-1"
-                  >
-                    Order <span className="h-3 w-3">→</span>
-                  </a>
-                </div>
+                <p className="text-slate-600 mt-2 text-sm line-clamp-2">{product.description}</p>
+                
+                {/* Read More Button */}
+                <button
+                  onClick={() => openModal(product)}
+                  className="mt-4 w-full bg-transparent border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-600 hover:text-white px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
+                >
+                  Read More
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </button>
               </div>
             </motion.div>
           ))}
@@ -410,17 +405,133 @@ const Products: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Product Detail Modal */}
+      <AnimatePresence>
+        {isModalOpen && selectedProduct && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            onClick={closeModal}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="relative bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-slate-100 transition-colors duration-200"
+              >
+                <X className="h-6 w-6 text-slate-700" />
+              </button>
+
+              {/* Product Image */}
+              <div className="relative h-72 md:h-96 bg-gradient-to-br from-cyan-50 to-white overflow-hidden rounded-t-3xl">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-cover"
+                />
+                {selectedProduct.badge && (
+                  <span className="absolute top-4 left-4 bg-cyan-700/90 text-white text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm">
+                    {selectedProduct.badge}
+                  </span>
+                )}
+              </div>
+
+              {/* Product Details */}
+              <div className="p-6 md:p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-slate-800">
+                      {selectedProduct.name}
+                    </h3>
+                    <p className="text-cyan-700 font-medium text-lg mt-1">
+                      {selectedProduct.capacity}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                    Product Description
+                  </h4>
+                  <p className="text-slate-700 leading-relaxed">
+                    {selectedProduct.description}
+                  </p>
+                  <p className="text-slate-600 mt-3 text-sm leading-relaxed">
+                    Our {selectedProduct.name.toLowerCase()} is manufactured with the highest quality standards, 
+                    ensuring purity and safety in every drop. Perfect for {selectedProduct.capacity.toLowerCase()} 
+                    requirements, this product is ideal for {selectedProduct.id === 'event-cup' ? 'events and gatherings' : 
+                    selectedProduct.id === 'portable-bottle' ? 'daily use and travel' : 'homes and offices'}.
+                  </p>
+                </div>
+
+                {/* WhatsApp CTA Button */}
+                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                  <a
+                    href={`https://wa.me/919542163369?text=Hi%20Girnar%20Beverages%2C%20I%27m%20interested%20in%20your%20${encodeURIComponent(selectedProduct.name)}%20(${encodeURIComponent(selectedProduct.capacity)})`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-emerald-200/50 flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    Order on WhatsApp
+                  </a>
+                  <a
+                    href="#contact"
+                    onClick={closeModal}
+                    className="flex-1 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 px-6 py-3.5 rounded-full font-medium transition-all duration-300 border border-cyan-200 flex items-center justify-center gap-2"
+                  >
+                    <Mail className="h-5 w-5" />
+                    Inquire Now
+                  </a>
+                </div>
+
+                {/* Additional Info */}
+                <div className="mt-6 pt-6 border-t border-cyan-100/50">
+                  <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+                    <span className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-emerald-500" />
+                      <span>100% Pure & Safe</span>
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <Shield className="h-4 w-4 text-cyan-600" />
+                      <span>FSSAI Certified</span>
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <Truck className="h-4 w-4 text-cyan-600" />
+                      <span>Free Delivery*</span>
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-3">
+                    *Free delivery on orders above ₹500. Terms and conditions apply.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
 
-// Quality Process
-const QualityProcess: React.FC = () => {
+// Quality Process - Updated with 3 steps (removed 4th stage)
+const QualityProcess = () => {
   const steps = [
     { title: 'Sand & Carbon Filtration', desc: 'Removes impurities and sediments.' },
     { title: 'Reverse Osmosis (RO)', desc: 'High-pressure membrane filtration for purity.' },
     { title: 'UV Sterilization', desc: 'Eliminates bacteria and viruses.' },
-    { title: 'Ozonation & Mineral Fortification', desc: 'Adds essential minerals and ensures freshness.' },
+    // Removed: 'Ozonation & Mineral Fortification'
   ];
 
   return (
@@ -478,7 +589,7 @@ const QualityProcess: React.FC = () => {
         >
           <div className="flex items-center gap-3">
             <Award className="h-6 w-6 text-amber-500" />
-            <span className="text-sm font-medium text-slate-700">FSSAI License: 1234567890</span>
+            <span className="text-sm font-medium text-slate-700">FSSAI License: 13626010000424</span>
           </div>
           <div className="flex items-center gap-3">
             <Shield className="h-6 w-6 text-emerald-500" />
@@ -495,7 +606,7 @@ const QualityProcess: React.FC = () => {
 };
 
 // About Us
-const About: React.FC = () => {
+const About = () => {
   return (
     <section id="about-us" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -507,9 +618,9 @@ const About: React.FC = () => {
           className="grid md:grid-cols-2 gap-12 items-center"
         >
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800">About Girnar Enterprises</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800">About Girnar Beverages</h2>
             <p className="text-slate-600 mt-4 leading-relaxed">
-              Girnar Enterprises is committed to providing the highest quality drinking water
+              Girnar Beverages is committed to providing the highest quality drinking water
               to our community. We believe that access to pure, safe water is a fundamental right,
               and we strive to deliver it with utmost hygiene and reliability.
             </p>
@@ -543,18 +654,18 @@ const About: React.FC = () => {
   );
 };
 
-// Contact & WhatsApp Integration
-const Contact: React.FC = () => {
+// Contact & WhatsApp Integration - Updated with manufacturing address
+const Contact = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', address: '', requirement: 'home' });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const message = `Name: ${formData.name}, Phone: ${formData.phone}, Address: ${formData.address}, Requirement: ${formData.requirement}`;
-    window.open(`https://wa.me/919999999999?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/919542163369?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
@@ -640,14 +751,14 @@ const Contact: React.FC = () => {
           >
             <div className="grid grid-cols-2 gap-4">
               <a
-                href="tel:+919999999999"
+                href="tel:+919542163369"
                 className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-cyan-100/40 shadow-lg hover:shadow-xl transition-all"
               >
                 <Phone className="h-8 w-8 text-cyan-700" />
                 <span className="text-sm font-medium text-slate-700 mt-2">Call Us</span>
               </a>
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/919542163369"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col items-center justify-center p-6 bg-emerald-50/60 backdrop-blur-sm rounded-2xl border border-emerald-100/40 shadow-lg hover:shadow-xl transition-all"
@@ -656,13 +767,44 @@ const Contact: React.FC = () => {
                 <span className="text-sm font-medium text-slate-700 mt-2">Chat on WhatsApp</span>
               </a>
             </div>
+            
+            {/* Manufacturing Address */}
             <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-cyan-100/40 shadow-lg">
               <h4 className="font-semibold text-slate-800 flex items-center gap-2">
                 <MapPin className="h-5 w-5 text-cyan-700" />
+                Manufacturing Address
+              </h4>
+              <div className="mt-3 text-sm text-slate-600 space-y-1">
+                <p className="font-medium text-slate-800">GIRNAR BEVERAGES</p>
+                <p>Plot No: 696, Gaganvihar Colony,</p>
+                <p>Balapur Mandal, Rangareddy Dist,</p>
+                <p>Telangana - 500005</p>
+                <p className="mt-2 text-xs text-slate-500">FSSAI Lic. No.: 13626010000424</p>
+              </div>
+            </div>
+
+            {/* Registered Office Address */}
+            <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-cyan-100/40 shadow-lg">
+              <h4 className="font-semibold text-slate-800 flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-cyan-700" />
+                Registered Office
+              </h4>
+              <div className="mt-3 text-sm text-slate-600 space-y-1">
+                <p>15-1-52, Flat No. 303,</p>
+                <p>SUKH SHANTI APARTMENTS,</p>
+                <p>Old Feelkhana, Opp to Mahaveer Plaza,</p>
+                <p>Hyderabad, Telangana - 500012</p>
+              </div>
+            </div>
+
+            {/* Serviceable Areas */}
+            <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-cyan-100/40 shadow-lg">
+              <h4 className="font-semibold text-slate-800 flex items-center gap-2">
+                <Truck className="h-5 w-5 text-cyan-700" />
                 Serviceable Areas
               </h4>
               <div className="flex flex-wrap gap-2 mt-3">
-                {['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Hyderabad', 'Pune', 'Ahmedabad'].map((area) => (
+                {['Hyderabad', 'Secunderabad', 'Balapur', 'Kandukur', 'Feelkhana', 'Old City', 'Rangareddy'].map((area) => (
                   <span key={area} className="bg-cyan-50/80 px-3 py-1 rounded-full text-xs font-medium text-slate-700 border border-cyan-100/30">
                     {area}
                   </span>
@@ -677,7 +819,7 @@ const Contact: React.FC = () => {
 };
 
 // Testimonials & FAQ
-const TestimonialsFAQ: React.FC = () => {
+const TestimonialsFAQ = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
 
   return (
@@ -760,8 +902,8 @@ const TestimonialsFAQ: React.FC = () => {
   );
 };
 
-// Footer
-const Footer: React.FC = () => {
+// Footer - Updated with real business details
+const Footer = () => {
   return (
     <footer className="bg-slate-800 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -769,14 +911,14 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <Droplets className="h-8 w-8 text-cyan-400" fill="#0284C7" stroke="none" />
-              <span className="text-xl font-bold">Girnar Enterprises</span>
+              <span className="text-xl font-bold">Girnar Beverages</span>
             </div>
             <p className="text-sm text-slate-300 mt-3">Pure, refreshing, and safe drinking water for all.</p>
             <div className="flex gap-4 mt-4">
-              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">FB</a>
-              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">IG</a>
-              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">X</a>
-              <a href="/" className="text-slate-300 hover:text-white transition-colors text-sm">YT</a>
+              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">FB</a>
+              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">IG</a>
+              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">X</a>
+              <a href="#" className="text-slate-300 hover:text-white transition-colors text-sm">YT</a>
             </div>
           </div>
           <div>
@@ -791,7 +933,8 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold text-white mb-3">Certifications</h4>
             <ul className="space-y-2 text-sm text-slate-300">
-              <li>FSSAI License: 1234567890</li>
+              <li>GSTIN: 36AGQPB4234K3Z8</li>
+              <li>FSSAI License: 13626010000424</li>
               <li>BIS (ISI) Certified</li>
               <li>ISO 9001:2015</li>
             </ul>
@@ -799,14 +942,15 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold text-white mb-3">Contact</h4>
             <ul className="space-y-2 text-sm text-slate-300">
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +91 9999999999</li>
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> info@girnarenterprises.com</li>
-              <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Mumbai, India</li>
+              <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +91 9542163369</li>
+              <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +91 9246999310</li>
+              <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> info@girnarBeverages.com</li>
+              <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Hyderabad, India</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-slate-700/50 mt-8 pt-6 text-center text-sm text-slate-400">
-          &copy; {new Date().getFullYear()} Girnar Enterprises. All rights reserved.
+          &copy; {new Date().getFullYear()} Girnar Beverages. All rights reserved.
         </div>
       </div>
     </footer>
@@ -814,7 +958,7 @@ const Footer: React.FC = () => {
 };
 
 // Main App Component
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="font-sans antialiased">
       <Header />
