@@ -1,4 +1,4 @@
-// src/App.js - Complete Updated Version with Custom Branding Nav Link
+// src/App.js - Complete Updated Version
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -27,48 +27,57 @@ import {
   Cog,
   TestTube,
   Warehouse,
+  CupSoda,
+  SprayCan,
+  Droplet,
+  GlassWater,
 } from 'lucide-react';
 
 // ============================================
 // STATIC DATA
 // ============================================
 
-// Oxeneon Sub-Categories
+// Oxeneon Sub-Categories — ✅ Emoji replaced with lucide-react icons
 const oxeneonSizes = [
   {
     id: 'oxeneon-200ml',
     size: '200 ml',
     tag: 'Event Cup / Mini Pack',
     description: 'Perfect for meetings, events & functions',
-    icon: '🥤',
+    icon: CupSoda,
+    color: 'from-cyan-500 to-blue-500',
   },
   {
     id: 'oxeneon-250ml',
     size: '250 ml',
     tag: 'Pocket Pack / Events',
     description: 'Convenient for travel & gatherings',
-    icon: '🧴',
+    icon: SprayCan,
+    color: 'from-blue-500 to-indigo-500',
   },
   {
     id: 'oxeneon-500ml',
     size: '500 ml',
     tag: 'Travel & Fitness Pack',
     description: 'Ideal for gym, office & travel',
-    icon: '💧',
+    icon: Droplet,
+    color: 'from-cyan-500 to-teal-500',
   },
   {
     id: 'oxeneon-700ml',
     size: '700 ml',
     tag: 'On-the-Go Premium',
     description: 'Premium hydration for active lifestyle',
-    icon: '✨',
+    icon: Sparkles,
+    color: 'from-amber-500 to-orange-500',
   },
   {
     id: 'oxeneon-1L',
     size: '1 Liter',
     tag: 'Daily Hydration Pack',
     description: 'Perfect for home & office use',
-    icon: '🏺',
+    icon: GlassWater,
+    color: 'from-cyan-500 to-blue-600',
   },
 ];
 
@@ -136,7 +145,7 @@ const factoryFeatures = [
   },
 ];
 
-// Leadership Team
+// Leadership Team (legacy — not used after refactor, kept for safety)
 const leadership = [
   {
     id: 1,
@@ -211,7 +220,6 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [hoveredLink, setHoveredLink] = useState(null);
 
-  // ✅ Updated: "Custom Branding" link added (points to #custom-branding)
   const navLinks = [
     { label: 'Home', id: 'home' },
     { label: 'Products', id: 'products' },
@@ -757,31 +765,43 @@ const Products = () => {
             </div>
           </div>
 
+          {/* Available Sizes — ✅ Icons instead of emojis */}
           <div className="relative mt-10 md:mt-12">
             <p className="text-white/90 text-sm font-semibold uppercase tracking-wider mb-4 text-center md:text-left">
               Available Sizes
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
-              {oxeneonSizes.map((item, idx) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5, scale: 1.03 }}
-                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 text-center shadow-lg border border-white/40 cursor-pointer transition-all"
-                >
-                  <div className="text-3xl mb-1">{item.icon}</div>
-                  <p className="text-base md:text-lg font-bold text-cyan-700">{item.size}</p>
-                  <p className="text-[11px] md:text-xs font-semibold text-slate-700 mt-1 leading-tight">
-                    {item.tag}
-                  </p>
-                  <p className="text-[10px] md:text-[11px] text-slate-500 mt-1 leading-tight hidden sm:block">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
+              {oxeneonSizes.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.id}
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.4, delay: idx * 0.08 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -5, scale: 1.03 }}
+                    className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 text-center shadow-lg border border-white/40 cursor-pointer transition-all"
+                  >
+                    {/* Icon */}
+                    <div className="flex justify-center mb-2">
+                      <div
+                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-md`}
+                      >
+                        <Icon className="h-6 w-6 text-white" strokeWidth={2.2} />
+                      </div>
+                    </div>
+
+                    <p className="text-base md:text-lg font-bold text-cyan-700">{item.size}</p>
+                    <p className="text-[11px] md:text-xs font-semibold text-slate-700 mt-1 leading-tight">
+                      {item.tag}
+                    </p>
+                    <p className="text-[10px] md:text-[11px] text-slate-500 mt-1 leading-tight hidden sm:block">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </motion.div>
@@ -1002,260 +1022,8 @@ const FactoryShowcase = () => {
   );
 };
 
-// ---------- Leadership Section (Proprietary: 1 Director + 2 Partners) ----------
-const Leadership = () => {
-  // Director data
-  const director = {
-    name: 'Director',
-    designation: 'Founder & Managing Director',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces',
-    quote:
-      'Our core objective is to deliver global-standard drinking water to every household at accessible prices. Purity is not a luxury — it is a right.',
-    gradient: 'from-cyan-500 to-blue-600',
-  };
-
-  // Partners data (2 partners)
-  const partners = [
-    {
-      id: 'partner-1',
-      name: 'Partner 1',
-      designation: 'Operations Head',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces',
-      quote:
-        'By integrating state-of-the-art automated machinery, we ensure complete hygiene and minimal human touch at every stage of production.',
-      gradient: 'from-emerald-500 to-teal-600',
-    },
-    {
-      id: 'partner-2',
-      name: 'Partner 2',
-      designation: 'Quality Assurance Head',
-      image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=faces',
-      quote:
-        'Every single bottle of Oxeneon undergoes stringent quality checks to match national standards. We never compromise on purity.',
-      gradient: 'from-purple-500 to-indigo-600',
-    },
-  ];
-
-  return (
-    <section id="leadership" className="py-20 bg-slate-50/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-cyan-100/60 px-4 py-1.5 rounded-full text-cyan-800 text-sm font-medium mb-4">
-            <Users className="h-4 w-4" />
-            <span>Our Leadership</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
-            Messages From Our Director & Partners
-          </h2>
-          <p className="text-slate-600 mt-2 max-w-2xl mx-auto">
-            The vision and commitment that drive Girnar Beverages forward.
-          </p>
-        </motion.div>
-
-        {/* ============================
-            ROW 1: Director (Full Width)
-            ============================ */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative bg-white rounded-3xl border border-cyan-100/40 p-6 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden mb-8 group"
-        >
-          {/* Decorative gradient blob */}
-          <div
-            className={`absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br ${director.gradient} opacity-10 group-hover:opacity-20 transition-opacity blur-3xl`}
-          />
-
-          {/* Quote icon */}
-          <Quote className="absolute top-6 right-6 h-10 w-10 text-cyan-200" />
-
-          <div className="relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
-            {/* Profile Image */}
-            <div className="relative flex-shrink-0">
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${director.gradient} rounded-full blur-md opacity-60`}
-              />
-              <img
-                src={director.image}
-                alt={director.name}
-                className="relative w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-xl"
-              />
-            </div>
-
-            {/* Content */}
-            <div className="flex-1">
-              <h3 className="text-xl md:text-2xl font-bold text-slate-800">
-                {director.name}
-              </h3>
-              <p
-                className={`text-sm md:text-base font-semibold mt-1 bg-gradient-to-r ${director.gradient} bg-clip-text text-transparent`}
-              >
-                {director.designation}
-              </p>
-
-              <p className="text-slate-600 text-base md:text-lg mt-5 leading-relaxed italic">
-                "{director.quote}"
-              </p>
-
-              <div
-                className={`mt-5 h-1 w-20 rounded-full bg-gradient-to-r ${director.gradient}`}
-              />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ============================
-            ROW 2: Two Partners (50/50 grid)
-            ============================ */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {partners.map((partner, idx) => (
-            <motion.div
-              key={partner.id}
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className="relative bg-white rounded-3xl border border-cyan-100/40 p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
-            >
-              {/* Decorative gradient blob */}
-              <div
-                className={`absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${partner.gradient} opacity-10 group-hover:opacity-20 transition-opacity blur-2xl`}
-              />
-
-              {/* Quote icon */}
-              <Quote className="absolute top-6 right-6 h-8 w-8 text-cyan-200" />
-
-              {/* Profile Image */}
-              <div className="relative mb-5">
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${partner.gradient} rounded-full blur-md opacity-60`}
-                />
-                <img
-                  src={partner.image}
-                  alt={partner.name}
-                  className="relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-white shadow-xl"
-                />
-              </div>
-
-              {/* Name & Role */}
-              <h3 className="text-lg md:text-xl font-bold text-slate-800">
-                {partner.name}
-              </h3>
-              <p
-                className={`text-sm font-semibold mt-0.5 bg-gradient-to-r ${partner.gradient} bg-clip-text text-transparent`}
-              >
-                {partner.designation}
-              </p>
-
-              {/* Quote */}
-              <p className="text-slate-600 text-sm md:text-base mt-5 leading-relaxed italic">
-                "{partner.quote}"
-              </p>
-
-              {/* Bottom accent line */}
-              <div
-                className={`mt-6 h-1 w-16 rounded-full bg-gradient-to-r ${partner.gradient}`}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// ---------- Quality Process ----------
-const QualityProcess = () => {
-  const steps = [
-    { title: 'Sand & Carbon Filtration', desc: 'Removes impurities and sediments.' },
-    { title: 'Reverse Osmosis (RO)', desc: 'High-pressure membrane filtration for purity.' },
-    { title: 'UV Sterilization', desc: 'Eliminates bacteria and viruses.' },
-  ];
-
-  return (
-    <section id="quality-process" className="py-20 bg-slate-50/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
-            Quality & Purification Process
-          </h2>
-          <p className="text-slate-600 mt-2">Every drop goes through rigorous purification.</p>
-        </motion.div>
-
-        <div className="relative">
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-cyan-200/60 -translate-x-1/2" />
-          <div className="space-y-8 md:space-y-0 relative">
-            {steps.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ x: idx % 2 === 0 ? -30 : 30, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 ${
-                  idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-              >
-                <div className={`w-full md:w-5/12 ${idx % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                  <div className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl border border-cyan-100/40 shadow-lg">
-                    <h3 className="text-xl font-bold text-slate-800">{step.title}</h3>
-                    <p className="text-slate-600">{step.desc}</p>
-                  </div>
-                </div>
-                <div className="hidden md:flex w-2/12 justify-center relative">
-                  <div className="w-8 h-8 bg-cyan-700 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center text-white text-sm font-bold">
-                    {idx + 1}
-                  </div>
-                </div>
-                <div className="w-full md:w-5/12" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-16 flex flex-wrap justify-center gap-6 p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-cyan-100/30"
-        >
-          <div className="flex items-center gap-3">
-            <Award className="h-6 w-6 text-amber-500" />
-            <span className="text-sm font-medium text-slate-700">
-              FSSAI License: 13626010000424
-            </span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Shield className="h-6 w-6 text-emerald-500" />
-            <span className="text-sm font-medium text-slate-700">BIS (ISI) Certified</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <CheckCircle className="h-6 w-6 text-cyan-600" />
-            <span className="text-sm font-medium text-slate-700">ISO 9001:2015</span>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
 // ---------- Custom Labeling Service Section ----------
-// ✅ Section id="custom-branding" — matches the header nav link
+// ✅ Placed BEFORE Leadership as requested
 const CustomLabeling = () => {
   return (
     <section id="custom-branding" className="py-20 bg-white">
@@ -1347,6 +1115,242 @@ const CustomLabeling = () => {
                 </motion.div>
               </div>
             </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+// ---------- Leadership Section (Proprietary: 1 Director + 2 Partners) ----------
+const Leadership = () => {
+  // Director data
+  const director = {
+    name: 'Director',
+    designation: 'Founder & Managing Director',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces',
+    quote:
+      'Our core objective is to deliver global-standard drinking water to every household at accessible prices. Purity is not a luxury — it is a right.',
+    gradient: 'from-cyan-500 to-blue-600',
+  };
+
+  // Partners data (2 partners)
+  const partners = [
+    {
+      id: 'partner-1',
+      name: 'Partner 1',
+      designation: 'Operations Head',
+      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces',
+      quote:
+        'By integrating state-of-the-art automated machinery, we ensure complete hygiene and minimal human touch at every stage of production.',
+      gradient: 'from-emerald-500 to-teal-600',
+    },
+    {
+      id: 'partner-2',
+      name: 'Partner 2',
+      designation: 'Quality Assurance Head',
+      image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=faces',
+      quote:
+        'Every single bottle of Oxeneon undergoes stringent quality checks to match national standards. We never compromise on purity.',
+      gradient: 'from-purple-500 to-indigo-600',
+    },
+  ];
+
+  return (
+    <section id="leadership" className="py-20 bg-slate-50/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-cyan-100/60 px-4 py-1.5 rounded-full text-cyan-800 text-sm font-medium mb-4">
+            <Users className="h-4 w-4" />
+            <span>Our Leadership</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
+            Messages From Our Director & Partners
+          </h2>
+          <p className="text-slate-600 mt-2 max-w-2xl mx-auto">
+            The vision and commitment that drive Girnar Beverages forward.
+          </p>
+        </motion.div>
+
+        {/* ROW 1: Director (Full Width) */}
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="relative bg-white rounded-3xl border border-cyan-100/40 p-6 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden mb-8 group"
+        >
+          <div
+            className={`absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br ${director.gradient} opacity-10 group-hover:opacity-20 transition-opacity blur-3xl`}
+          />
+          <Quote className="absolute top-6 right-6 h-10 w-10 text-cyan-200" />
+
+          <div className="relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
+            <div className="relative flex-shrink-0">
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${director.gradient} rounded-full blur-md opacity-60`}
+              />
+              <img
+                src={director.image}
+                alt={director.name}
+                className="relative w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-xl"
+              />
+            </div>
+
+            <div className="flex-1">
+              <h3 className="text-xl md:text-2xl font-bold text-slate-800">
+                {director.name}
+              </h3>
+              <p
+                className={`text-sm md:text-base font-semibold mt-1 bg-gradient-to-r ${director.gradient} bg-clip-text text-transparent`}
+              >
+                {director.designation}
+              </p>
+
+              <p className="text-slate-600 text-base md:text-lg mt-5 leading-relaxed italic">
+                "{director.quote}"
+              </p>
+
+              <div
+                className={`mt-5 h-1 w-20 rounded-full bg-gradient-to-r ${director.gradient}`}
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ROW 2: Two Partners (50/50 grid) */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {partners.map((partner, idx) => (
+            <motion.div
+              key={partner.id}
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="relative bg-white rounded-3xl border border-cyan-100/40 p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+            >
+              <div
+                className={`absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${partner.gradient} opacity-10 group-hover:opacity-20 transition-opacity blur-2xl`}
+              />
+              <Quote className="absolute top-6 right-6 h-8 w-8 text-cyan-200" />
+
+              <div className="relative mb-5">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${partner.gradient} rounded-full blur-md opacity-60`}
+                />
+                <img
+                  src={partner.image}
+                  alt={partner.name}
+                  className="relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-white shadow-xl"
+                />
+              </div>
+
+              <h3 className="text-lg md:text-xl font-bold text-slate-800">
+                {partner.name}
+              </h3>
+              <p
+                className={`text-sm font-semibold mt-0.5 bg-gradient-to-r ${partner.gradient} bg-clip-text text-transparent`}
+              >
+                {partner.designation}
+              </p>
+
+              <p className="text-slate-600 text-sm md:text-base mt-5 leading-relaxed italic">
+                "{partner.quote}"
+              </p>
+
+              <div
+                className={`mt-6 h-1 w-16 rounded-full bg-gradient-to-r ${partner.gradient}`}
+              />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ---------- Quality Process ----------
+const QualityProcess = () => {
+  const steps = [
+    { title: 'Sand & Carbon Filtration', desc: 'Removes impurities and sediments.' },
+    { title: 'Reverse Osmosis (RO)', desc: 'High-pressure membrane filtration for purity.' },
+    { title: 'UV Sterilization', desc: 'Eliminates bacteria and viruses.' },
+  ];
+
+  return (
+    <section id="quality-process" className="py-20 bg-slate-50/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
+            Quality & Purification Process
+          </h2>
+          <p className="text-slate-600 mt-2">Every drop goes through rigorous purification.</p>
+        </motion.div>
+
+        <div className="relative">
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-cyan-200/60 -translate-x-1/2" />
+          <div className="space-y-8 md:space-y-0 relative">
+            {steps.map((step, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ x: idx % 2 === 0 ? -30 : 30, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 ${
+                  idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                }`}
+              >
+                <div className={`w-full md:w-5/12 ${idx % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                  <div className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl border border-cyan-100/40 shadow-lg">
+                    <h3 className="text-xl font-bold text-slate-800">{step.title}</h3>
+                    <p className="text-slate-600">{step.desc}</p>
+                  </div>
+                </div>
+                <div className="hidden md:flex w-2/12 justify-center relative">
+                  <div className="w-8 h-8 bg-cyan-700 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center text-white text-sm font-bold">
+                    {idx + 1}
+                  </div>
+                </div>
+                <div className="w-full md:w-5/12" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-16 flex flex-wrap justify-center gap-6 p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-cyan-100/30"
+        >
+          <div className="flex items-center gap-3">
+            <Award className="h-6 w-6 text-amber-500" />
+            <span className="text-sm font-medium text-slate-700">
+              FSSAI License: 13626010000424
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <Shield className="h-6 w-6 text-emerald-500" />
+            <span className="text-sm font-medium text-slate-700">BIS (ISI) Certified</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <CheckCircle className="h-6 w-6 text-cyan-600" />
+            <span className="text-sm font-medium text-slate-700">ISO 9001:2015</span>
           </div>
         </motion.div>
       </div>
@@ -1790,8 +1794,7 @@ const App = () => {
       <Products />
       <FactoryShowcase />
       <QualityProcess />
-      
-      <CustomLabeling />
+      <CustomLabeling />    {/* ✅ Custom Branding — BEFORE Leadership */}
       <Leadership />
       <About />
       <Contact />
