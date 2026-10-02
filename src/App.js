@@ -960,7 +960,7 @@ const About = () => {
             </div>
           </div>
           <div className="relative">
-            <img src="....." alt="Water purification plant" className="rounded-2xl shadow-xl border border-cyan-100/40" />
+            <img src="plant.jpg" alt="Water purification plant" className="rounded-2xl shadow-xl border border-cyan-100/40" />
             <div className="absolute -bottom-4 -right-4 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-cyan-100">
               <span className="text-sm font-bold text-cyan-700">100% Pure</span>
             </div>
