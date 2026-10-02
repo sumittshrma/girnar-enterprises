@@ -1,4 +1,4 @@
-// src/App.js - Complete Clean Version (No Duplicates)
+// src/App.js 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -34,7 +34,7 @@ import {
 // STATIC DATA
 // ============================================
 
-// Oxeneon Sub-Categories (Icons instead of emojis)
+// Oxeneon Sub-Categories 
 const oxeneonSizes = [
   {
     id: 'oxeneon-200ml',
@@ -85,7 +85,7 @@ const products = [
     name: 'Oxeneon Pure Water',
     capacity: '200ml · 250ml · 500ml · 700ml · 1L',
     description: 'Our flagship brand — premium packaged drinking water available in 5 convenient sizes for every need.',
-    image: 'https://images.unsplash.com/photo-1616118132534-3812ab0f62c2?w=500&h=500&fit=crop&crop=center&auto=format',
+    image: 'Oxeneon.png',
     badge: '⭐ Flagship Brand',
     isFlagship: true,
   },
@@ -94,7 +94,7 @@ const products = [
     name: 'Event Cup',
     capacity: '200ml / 250ml',
     description: 'Perfect for events, meetings, and corporate gatherings. Our event cups are designed for convenience and hygiene with secure sealing.',
-    image: 'https://share.google/yipKHSMHWrGv3Se2D',
+    image: 'Product1.png',
     badge: 'Bulk Order',
   },
   {
@@ -102,14 +102,14 @@ const products = [
     name: 'Portable Bottle',
     capacity: '500ml / 1L',
     description: 'Convenient for travel, gym, and daily hydration. Made with BPA-free material for your safety and health.',
-    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop&crop=center&auto=format',
+    image: 'Product2.png',
   },
   {
     id: 'water-jar',
     name: 'Water Jar',
     capacity: '20 Liters',
     description: 'Ideal for homes, offices, and commercial spaces. Our 20L jars come with a secure seal for lasting freshness.',
-    image: 'https://images.unsplash.com/photo-1616118132534-3812ab0f62c2?w=400&h=400&fit=crop&crop=center&auto=format',
+    image: 'Product3.png',
     badge: 'Subscription Available',
   },
 ];
@@ -433,7 +433,7 @@ const Hero = () => {
 
               <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-gradient-to-br from-cyan-200/50 via-cyan-100/40 to-white rounded-full flex items-center justify-center shadow-[0_20px_60px_-15px_rgba(6,182,212,0.4)] border border-white/60 backdrop-blur-sm">
                 <div className="absolute inset-4 rounded-full border-2 border-dashed border-cyan-300/40" />
-                <motion.img animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="https://images.unsplash.com/photo-1616118132534-3812ab0f62c2?w=500&h=500&fit=crop&crop=center&auto=format" alt="Pure Water Bottle" className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl z-10" />
+                <motion.img animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="/hero.png" alt="Pure Water Bottle" className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl z-10" />
 
                 <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="absolute -top-2 -right-2 md:top-2 md:right-2 bg-white shadow-xl rounded-2xl px-3 py-2 flex items-center gap-2 border border-cyan-100">
                   <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center">
@@ -574,7 +574,7 @@ const Products = () => {
             </div>
 
             <div className="md:col-span-2 flex justify-center">
-              <motion.img animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="https://images.unsplash.com/photo-1616118132534-3812ab0f62c2?w=500&h=500&fit=crop&crop=center&auto=format" alt="Oxeneon Pure Water" className="w-52 h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl" />
+              <motion.img animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="/Oxeneon.png" alt="Oxeneon Pure Water" className="w-52 h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl" />
             </div>
           </div>
 
@@ -780,7 +780,7 @@ const CustomLabeling = () => {
             <div className="flex justify-center">
               <div className="relative">
                 <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.2, 0.5] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/40 to-blue-500/30 blur-3xl" />
-                <img src="https://images.unsplash.com/photo-1616118132534-3812ab0f62c2?w=500&h=500&fit=crop&crop=center&auto=format" alt="Custom Labeled Bottle" className="relative w-60 h-60 md:w-80 md:h-80 object-contain drop-shadow-2xl" />
+                <img src="/custom.png" alt="Custom Labeled Bottle" className="relative w-60 h-60 md:w-80 md:h-80 object-contain drop-shadow-2xl" />
 
                 <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="absolute -top-2 -right-4 bg-white rounded-2xl px-4 py-2 shadow-xl border border-cyan-100">
                   <p className="text-[10px] text-slate-500 font-medium">Your Brand</p>
