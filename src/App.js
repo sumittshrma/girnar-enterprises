@@ -798,7 +798,7 @@ const CustomLabeling = () => {
 // ---------- Leadership (1 Director + 2 Partners) ----------
 const Leadership = () => {
   const director = {
-    name: 'Director',
+    name: 'Dilip Bhansali',
     designation: 'Founder & Managing Director',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces',
     quote: 'Our core objective is to deliver global-standard drinking water to every household at accessible prices. Purity is not a luxury — it is a right.',
@@ -808,7 +808,7 @@ const Leadership = () => {
   const partners = [
     {
       id: 'partner-1',
-      name: 'Partner 1',
+      name: 'Amit Jain',
       designation: 'Operations Head',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces',
       quote: 'By integrating state-of-the-art automated machinery, we ensure complete hygiene and minimal human touch at every stage of production.',
@@ -960,7 +960,7 @@ const About = () => {
             </div>
           </div>
           <div className="relative">
-            <img src="https://images.unsplash.com/photo-1584824486509-112e4181ff6b?w=600&h=400&fit=crop&crop=center&auto=format" alt="Water purification plant" className="rounded-2xl shadow-xl border border-cyan-100/40" />
+            <img src="....." alt="Water purification plant" className="rounded-2xl shadow-xl border border-cyan-100/40" />
             <div className="absolute -bottom-4 -right-4 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-cyan-100">
               <span className="text-sm font-bold text-cyan-700">100% Pure</span>
             </div>
