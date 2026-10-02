@@ -1149,12 +1149,20 @@ const Footer = () => {
           </div>
           <div>
             <h4 className="font-semibold text-white mb-3">Contact</h4>
-            <ul className="space-y-2 text-sm text-slate-300">
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +91 9441830310</li>
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +91 9000005728</li>
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> info@girnarBeverages.com</li>
-              <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Hyderabad, India</li>
-            </ul>
+            <ul className="space-y-2 text-slate-400">
+  <li className="flex items-center gap-2">
+    <Phone className="w-4 h-4 text-sky-400" />
+    <span>WhatsApp / Main: <a href="https://wa.me/919542163369" className="hover:text-white">+91 95421 63369</a></span>
+  </li>
+  <li className="flex items-center gap-2">
+    <Phone className="w-4 h-4 text-sky-400" />
+    <span>Sales: <a href="tel:+919441830310" className="hover:text-white">+91 94418 30310</a></span>
+  </li>
+  <li className="flex items-center gap-2">
+    <Phone className="w-4 h-4 text-sky-400" />
+    <span>Support: <a href="tel:+919000005728" className="hover:text-white">+91 90000 05728</a></span>
+  </li>
+</ul>
           </div>
         </div>
         <div className="border-t border-slate-700/50 mt-8 pt-6 text-center text-sm text-slate-400">
