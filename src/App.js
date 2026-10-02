@@ -260,7 +260,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
   <img 
-    src="/logo.png" 
+    src="/logo.webp" 
     alt="Girnar Beverages Logo" 
     className="h-14 w-auto md:h-16 lg:h-20 object-contain" 
   />
@@ -1122,7 +1122,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3">
               <img 
-                src="/logo.png" 
+                src="/logo.webp" 
                 alt="Girnar Beverages Logo" 
                 className="h-14 w-14 object-contain bg-white rounded-lg p-1" 
               />
