@@ -258,12 +258,13 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center space-x-2">
-            <Droplets className="h-7 w-7 md:h-8 md:w-8 text-cyan-600" fill="#0284C7" stroke="none" />
-            <span className="text-lg md:text-2xl font-bold text-slate-800 tracking-tight">
-              Girnar <span className="text-cyan-700">Beverages</span>
-            </span>
-          </div>
+          <div className="flex items-center">
+  <img 
+    src="/logo.png" 
+    alt="Girnar Beverages Logo" 
+    className="h-14 w-auto md:h-16 lg:h-20 object-contain" 
+  />
+</div>
 
           <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium relative">
             {navLinks.map((link) => {
@@ -1119,8 +1120,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center gap-2">
-              <Droplets className="h-8 w-8 text-cyan-400" fill="#0284C7" stroke="none" />
+            <div className="flex items-center gap-3">
+              <img 
+                src="/logo.png" 
+                alt="Girnar Beverages Logo" 
+                className="h-14 w-14 object-contain bg-white rounded-lg p-1" 
+              />
               <span className="text-xl font-bold">Girnar Beverages</span>
             </div>
             <p className="text-sm text-slate-300 mt-3">Pure, refreshing, and safe drinking water for all.</p>
