@@ -85,7 +85,8 @@ const products = [
     name: 'Oxeneon Pure Water',
     capacity: '200ml · 250ml · 500ml · 700ml · 1L',
     description: 'Our flagship brand — premium packaged drinking water available in 5 convenient sizes for every need.',
-    image: 'Oxeneon.png',
+    image: 'Oxeneon.webp',
+    altText: 'Oxeneon Premium Packaged Drinking Water Bottle 1 Litre',
     badge: '⭐ Flagship Brand',
     isFlagship: true,
   },
@@ -94,7 +95,8 @@ const products = [
     name: 'Event Cup',
     capacity: '200ml / 250ml',
     description: 'Perfect for events, meetings, and corporate gatherings. Our event cups are designed for convenience and hygiene with secure sealing.',
-    image: 'Product1.png',
+    image: 'Product1.webp',
+    altText: 'Custom Labeled Event Water Cups 200ml and 250ml',
     badge: 'Bulk Order',
   },
   {
@@ -102,14 +104,16 @@ const products = [
     name: 'Portable Bottle',
     capacity: '500ml / 1L',
     description: 'Convenient for travel, gym, and daily hydration. Made with BPA-free material for your safety and health.',
-    image: 'Product2.png',
+    image: 'Product2.webp',
+    altText: 'BPA-Free Portable Mineral Water Bottles 500ml and 1 Litre',
   },
   {
     id: 'water-jar',
     name: 'Water Jar',
     capacity: '20 Liters',
     description: 'Ideal for homes, offices, and commercial spaces. Our 20L jars come with a secure seal for lasting freshness.',
-    image: 'Product3.png',
+    image: 'Product3.webp',
+    altText: '20 Litre Packaged Mineral Water Jar for Office and Home',
     badge: 'Subscription Available',
   },
 ];
@@ -433,7 +437,7 @@ const Hero = () => {
 
               <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-gradient-to-br from-cyan-200/50 via-cyan-100/40 to-white rounded-full flex items-center justify-center shadow-[0_20px_60px_-15px_rgba(6,182,212,0.4)] border border-white/60 backdrop-blur-sm">
                 <div className="absolute inset-4 rounded-full border-2 border-dashed border-cyan-300/40" />
-                <motion.img animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="/hero.png" alt="Pure Water Bottle" className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl z-10" />
+                <motion.img animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="/hero.webp" alt="Girnar Beverages Packaged Drinking Water Bottles and Plant Hyderabad" className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl z-10" />
 
                 <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="absolute -top-2 -right-2 md:top-2 md:right-2 bg-white shadow-xl rounded-2xl px-3 py-2 flex items-center gap-2 border border-cyan-100">
                   <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center">
@@ -574,7 +578,7 @@ const Products = () => {
             </div>
 
             <div className="md:col-span-2 flex justify-center">
-              <motion.img animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="/Oxeneon.png" alt="Oxeneon Pure Water" className="w-52 h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl" />
+              <motion.img animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} src="/Oxeneon.webp" alt="Oxeneon Premium Mineral Water Bottle by Girnar Beverages" className="w-52 h-52 md:w-64 md:h-64 object-contain drop-shadow-2xl" />
             </div>
           </div>
 
@@ -615,7 +619,7 @@ const Products = () => {
           {products.filter((p) => !p.isFlagship).map((product, idx) => (
             <motion.div key={product.id} initial={{ y: 30, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, delay: idx * 0.1 }} viewport={{ once: true }} className="bg-white rounded-2xl border border-cyan-100/40 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group">
               <div className="relative h-56 bg-gradient-to-br from-cyan-50 to-white overflow-hidden">
-                <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={product.image} alt={product.altText || product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 {product.badge && (
                   <span className="absolute top-4 left-4 bg-cyan-700/90 text-white text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm">{product.badge}</span>
                 )}
@@ -657,7 +661,7 @@ const Products = () => {
                 <X className="h-6 w-6 text-slate-700" />
               </button>
               <div className="relative h-72 md:h-96 bg-gradient-to-br from-cyan-50 to-white overflow-hidden rounded-t-3xl">
-                <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover" />
+                <img src={selectedProduct.image} alt={selectedProduct.altText || selectedProduct.name} className="w-full h-full object-cover" />
                 {selectedProduct.badge && (
                   <span className="absolute top-4 left-4 bg-cyan-700/90 text-white text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm">{selectedProduct.badge}</span>
                 )}
@@ -701,7 +705,7 @@ const FactoryShowcase = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="relative rounded-3xl overflow-hidden shadow-2xl mb-12">
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=600&fit=crop&crop=center&auto=format" alt="Automated Manufacturing Plant" className="w-full h-64 md:h-96 object-cover" />
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=600&fit=crop&crop=center&auto=format" alt="Girnar Beverages Fully Automated Water Bottling Plant Line" className="w-full h-64 md:h-96 object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
             <h3 className="text-2xl md:text-3xl font-bold">100% Automated Production Line</h3>
@@ -780,7 +784,7 @@ const CustomLabeling = () => {
             <div className="flex justify-center">
               <div className="relative">
                 <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.2, 0.5] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/40 to-blue-500/30 blur-3xl" />
-                <img src="/custom.png" alt="Custom Labeled Bottle" className="relative w-60 h-60 md:w-80 md:h-80 object-contain drop-shadow-2xl" />
+                <img src="/custom.webp" alt="Custom Labeled Packaged Drinking Water Bottle for Events" className="relative w-60 h-60 md:w-80 md:h-80 object-contain drop-shadow-2xl" />
 
                 <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="absolute -top-2 -right-4 bg-white rounded-2xl px-4 py-2 shadow-xl border border-cyan-100">
                   <p className="text-[10px] text-slate-500 font-medium">Your Brand</p>
@@ -839,7 +843,7 @@ const Leadership = () => {
               <div className={`absolute inset-0 bg-gradient-to-br ${director.gradient} rounded-full blur-md opacity-60`} />
               <img 
                 src={director.image} 
-                alt={director.name} 
+                alt="Dilip Bhansali Founder and Managing Director of Girnar Beverages" 
                 className="relative w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-4 border-white shadow-xl" 
               />
             </div>
@@ -941,7 +945,7 @@ const About = () => {
             </div>
           </div>
           <div className="relative">
-            <img src="plant.jpg" alt="Water purification plant" className="rounded-2xl shadow-xl border border-cyan-100/40" />
+            <img src="plant.webp" alt="Girnar Beverages Water Purification Plant Balapur Hyderabad" className="rounded-2xl shadow-xl border border-cyan-100/40" />
             <div className="absolute -bottom-4 -right-4 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-cyan-100">
               <span className="text-sm font-bold text-cyan-700">100% Pure</span>
             </div>
@@ -1150,19 +1154,19 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-white mb-3">Contact</h4>
             <ul className="space-y-2 text-slate-400">
-  <li className="flex items-center gap-2">
-    <Phone className="w-4 h-4 text-sky-400" />
-    <span>WhatsApp / Main: <a href="https://wa.me/919542163369" className="hover:text-white">+91 95421 63369</a></span>
-  </li>
-  <li className="flex items-center gap-2">
-    <Phone className="w-4 h-4 text-sky-400" />
-    <span>Sales: <a href="tel:+919441830310" className="hover:text-white">+91 94418 30310</a></span>
-  </li>
-  <li className="flex items-center gap-2">
-    <Phone className="w-4 h-4 text-sky-400" />
-    <span>Support: <a href="tel:+919000005728" className="hover:text-white">+91 90000 05728</a></span>
-  </li>
-</ul>
+              <li className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-sky-400" />
+                <span>WhatsApp / Main: <a href="https://wa.me/919542163369" className="hover:text-white">+91 95421 63369</a></span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-sky-400" />
+                <span>Sales: <a href="tel:+919441830310" className="hover:text-white">+91 94418 30310</a></span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-sky-400" />
+                <span>Support: <a href="tel:+919000005728" className="hover:text-white">+91 90000 05728</a></span>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="border-t border-slate-700/50 mt-8 pt-6 text-center text-sm text-slate-400">
