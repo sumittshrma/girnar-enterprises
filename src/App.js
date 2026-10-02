@@ -795,7 +795,7 @@ const CustomLabeling = () => {
   );
 };
 
-// ---------- Leadership (1 Director + 2 Partners) ----------
+// ---------- Leadership (Director Only) ----------
 const Leadership = () => {
   const director = {
     name: 'Dilip Bhansali',
@@ -805,76 +805,57 @@ const Leadership = () => {
     gradient: 'from-cyan-500 to-blue-600',
   };
 
-  const partners = [
-    {
-      id: 'partner-1',
-      name: 'Amit Jain',
-      designation: 'Operations Head',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces',
-      quote: 'By integrating state-of-the-art automated machinery, we ensure complete hygiene and minimal human touch at every stage of production.',
-      gradient: 'from-emerald-500 to-teal-600',
-    },
-    {
-      id: 'partner-2',
-      name: 'Partner 2',
-      designation: 'Quality Assurance Head',
-      image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=faces',
-      quote: 'Every single bottle of Oxeneon undergoes stringent quality checks to match national standards. We never compromise on purity.',
-      gradient: 'from-purple-500 to-indigo-600',
-    },
-  ];
-
   return (
     <section id="leadership" className="py-20 bg-slate-50/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-16">
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }} 
+          whileInView={{ y: 0, opacity: 1 }} 
+          transition={{ duration: 0.6 }} 
+          viewport={{ once: true }} 
+          className="text-center mb-12"
+        >
           <div className="inline-flex items-center gap-2 bg-cyan-100/60 px-4 py-1.5 rounded-full text-cyan-800 text-sm font-medium mb-4">
             <Users className="h-4 w-4" />
             <span>Our Leadership</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">Messages From Our Director & Partners</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">Message From Our Director</h2>
           <p className="text-slate-600 mt-2 max-w-2xl mx-auto">The vision and commitment that drive Girnar Beverages forward.</p>
         </motion.div>
 
-        {/* Director — Full Width */}
-        <motion.div initial={{ y: 30, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="relative bg-white rounded-3xl border border-cyan-100/40 p-6 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden mb-8 group">
+        {/* Director Card Only */}
+        <motion.div 
+          initial={{ y: 30, opacity: 0 }} 
+          whileInView={{ y: 0, opacity: 1 }} 
+          transition={{ duration: 0.6 }} 
+          viewport={{ once: true }} 
+          className="relative max-w-4xl mx-auto bg-white rounded-3xl border border-cyan-100/40 p-6 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+        >
           <div className={`absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br ${director.gradient} opacity-10 group-hover:opacity-20 transition-opacity blur-3xl`} />
           <Quote className="absolute top-6 right-6 h-10 w-10 text-cyan-200" />
 
           <div className="relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
             <div className="relative flex-shrink-0">
               <div className={`absolute inset-0 bg-gradient-to-br ${director.gradient} rounded-full blur-md opacity-60`} />
-              <img src={director.image} alt={director.name} className="relative w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-xl" />
+              <img 
+                src={director.image} 
+                alt={director.name} 
+                className="relative w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-4 border-white shadow-xl" 
+              />
             </div>
 
             <div className="flex-1">
               <h3 className="text-xl md:text-2xl font-bold text-slate-800">{director.name}</h3>
-              <p className={`text-sm md:text-base font-semibold mt-1 bg-gradient-to-r ${director.gradient} bg-clip-text text-transparent`}>{director.designation}</p>
-              <p className="text-slate-600 text-base md:text-lg mt-5 leading-relaxed italic">"{director.quote}"</p>
+              <p className={`text-sm md:text-base font-semibold mt-1 bg-gradient-to-r ${director.gradient} bg-clip-text text-transparent`}>
+                {director.designation}
+              </p>
+              <p className="text-slate-600 text-base md:text-lg mt-5 leading-relaxed italic">
+                "{director.quote}"
+              </p>
               <div className={`mt-5 h-1 w-20 rounded-full bg-gradient-to-r ${director.gradient}`} />
             </div>
           </div>
         </motion.div>
-
-        {/* Partners — 50/50 */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {partners.map((partner, idx) => (
-            <motion.div key={partner.id} initial={{ y: 30, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, delay: idx * 0.1 }} viewport={{ once: true }} className="relative bg-white rounded-3xl border border-cyan-100/40 p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-              <div className={`absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${partner.gradient} opacity-10 group-hover:opacity-20 transition-opacity blur-2xl`} />
-              <Quote className="absolute top-6 right-6 h-8 w-8 text-cyan-200" />
-
-              <div className="relative mb-5">
-                <div className={`absolute inset-0 bg-gradient-to-br ${partner.gradient} rounded-full blur-md opacity-60`} />
-                <img src={partner.image} alt={partner.name} className="relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-white shadow-xl" />
-              </div>
-
-              <h3 className="text-lg md:text-xl font-bold text-slate-800">{partner.name}</h3>
-              <p className={`text-sm font-semibold mt-0.5 bg-gradient-to-r ${partner.gradient} bg-clip-text text-transparent`}>{partner.designation}</p>
-              <p className="text-slate-600 text-sm md:text-base mt-5 leading-relaxed italic">"{partner.quote}"</p>
-              <div className={`mt-6 h-1 w-16 rounded-full bg-gradient-to-r ${partner.gradient}`} />
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
