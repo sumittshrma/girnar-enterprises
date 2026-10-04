@@ -258,15 +258,16 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center">
-  <img 
-    src="/logo.webp" 
-    alt="Girnar Beverages Logo" 
-    className="h-14 w-auto md:h-16 lg:h-20 object-contain" 
-  />
-</div>
+          {/* Mobile: Center Logo | Desktop: Left Logo */}
+          <div className="flex items-center xl:flex-1 xl:justify-start flex-1 justify-center xl:justify-start">
+            <img 
+              src="/logo.webp" 
+              alt="Girnar Beverages Logo" 
+              className="h-14 w-auto md:h-16 lg:h-20 object-contain" 
+            />
+          </div>
 
-          <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium relative">
+          <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium relative xl:flex-none">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               const isHovered = hoveredLink === link.id;
@@ -301,9 +302,9 @@ const Header = () => {
             })}
           </nav>
 
-          <div className="flex items-center space-x-2 md:space-x-4">
+          <div className="flex items-center space-x-2 md:space-x-4 xl:flex-1 xl:justify-end">
             <a
-              href="https://wa.me/919542163369"
+              href="https://wa.me/9177635556"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-emerald-200/50"
@@ -357,7 +358,7 @@ const Header = () => {
               })}
 
               <a
-                href="https://wa.me/919542163369"
+                href="https://wa.me/9177635556"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white px-4 py-3 rounded-xl text-sm font-medium transition-all w-full justify-center mt-3 shadow-md"
@@ -572,7 +573,7 @@ const Products = () => {
                 </span>
               </div>
 
-              <a href="https://wa.me/919542163369?text=Hi%20Girnar%20Beverages%2C%20I%27m%20interested%20in%20Oxeneon%20Pure%20Water." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-cyan-700 hover:bg-cyan-50 px-6 py-3 rounded-full font-semibold mt-6 transition-all shadow-lg">
+              <a href="https://wa.me/9177635556?text=Hi%20Girnar%20Beverages%2C%20I%27m%20interested%20in%20Oxeneon%20Pure%20Water." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-cyan-700 hover:bg-cyan-50 px-6 py-3 rounded-full font-semibold mt-6 transition-all shadow-lg">
                 <MessageCircle className="h-5 w-5" />
                 Order Oxeneon
               </a>
@@ -675,7 +676,7 @@ const Products = () => {
                   <p className="text-slate-700 leading-relaxed">{selectedProduct.description}</p>
                 </div>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                  <a href={`https://wa.me/919542163369?text=Hi%20Girnar%20Beverages%2C%20I%27m%20interested%20in%20your%20${encodeURIComponent(selectedProduct.name)}%20(${encodeURIComponent(selectedProduct.capacity)})`} target="_blank" rel="noopener noreferrer" className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-full font-medium transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
+                  <a href={`https://wa.me/9177635556?text=Hi%20Girnar%20Beverages%2C%20I%27m%20interested%20in%20your%20${encodeURIComponent(selectedProduct.name)}%20(${encodeURIComponent(selectedProduct.capacity)})`} target="_blank" rel="noopener noreferrer" className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-full font-medium transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
                     <MessageCircle className="h-5 w-5" />Order on WhatsApp
                   </a>
                   <a href="#contact-us" onClick={closeModal} className="flex-1 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 px-6 py-3.5 rounded-full font-medium transition-all duration-300 border border-cyan-200 flex items-center justify-center gap-2">
@@ -774,7 +775,7 @@ const CustomLabeling = () => {
                 </span>
               </div>
 
-              <a href={`https://wa.me/919542163369?text=${encodeURIComponent("Hi Girnar Beverages, I'm interested in custom sticker/labeling service for my event. Please share more details.")}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-7 py-3.5 rounded-full font-semibold mt-8 transition-all shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-[1.02]">
+              <a href={`https://wa.me/9177635556?text=${encodeURIComponent("Hi Girnar Beverages, I'm interested in custom sticker/labeling service for my event. Please share more details.")}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-7 py-3.5 rounded-full font-semibold mt-8 transition-all shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-[1.02]">
                 <MessageCircle className="h-5 w-5" />
                 Enquire Custom Stickers
               </a>
@@ -968,7 +969,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const message = `Name: ${formData.name}, Phone: ${formData.phone}, Address: ${formData.address}, Requirement: ${formData.requirement}`;
-    window.open(`https://wa.me/919542163369?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/9177635556?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
@@ -1002,11 +1003,11 @@ const Contact = () => {
 
           <motion.div initial={{ x: 30, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <a href="tel:+919542163369" className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-cyan-100/40 shadow-lg hover:shadow-xl transition-all">
+              <a href="tel:+9177635556" className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-cyan-100/40 shadow-lg hover:shadow-xl transition-all">
                 <Phone className="h-8 w-8 text-cyan-700" />
                 <span className="text-sm font-medium text-slate-700 mt-2">Call Us</span>
               </a>
-              <a href="https://wa.me/919542163369" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-6 bg-emerald-50/60 backdrop-blur-sm rounded-2xl border border-emerald-100/40 shadow-lg hover:shadow-xl transition-all">
+              <a href="https://wa.me/9177635556" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-6 bg-emerald-50/60 backdrop-blur-sm rounded-2xl border border-emerald-100/40 shadow-lg hover:shadow-xl transition-all">
                 <MessageCircle className="h-8 w-8 text-emerald-600" />
                 <span className="text-sm font-medium text-slate-700 mt-2">Chat on WhatsApp</span>
               </a>
@@ -1161,15 +1162,15 @@ const Footer = () => {
             <ul className="space-y-2 text-slate-400">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-sky-400" />
-                <span>WhatsApp / Main: <a href="https://wa.me/919542163369" className="hover:text-white">+91 95421 63369</a></span>
+                <span>WhatsApp / Main: <a href="https://wa.me/9177635556" className="hover:text-white">+91 77635 5556</a></span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-sky-400" />
-                <span>Sales: <a href="tel:+919441830310" className="hover:text-white">+91 94418 30310</a></span>
+                <span>Sales: <a href="tel:+919246999310" className="hover:text-white">+91 92469 99310</a></span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-sky-400" />
-                <span>Support: <a href="tel:+919000005728" className="hover:text-white">+91 90000 05728</a></span>
+                <span>Support: <a href="tel:+9177635556" className="hover:text-white">+91 77635 5556</a></span>
               </li>
             </ul>
           </div>
