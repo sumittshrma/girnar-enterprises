@@ -276,6 +276,7 @@ const MobileSplash = ({ onDismiss }) => {
 
 // ---------- Header ----------
 // ---------- Header ----------
+// ---------- Header ----------
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -372,10 +373,10 @@ const Header = () => {
         className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-cyan-100/30 shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-16 md:h-20 relative">
             
             {/* Mobile: Menu button (left) | Desktop: Logo (left) */}
-            <div className="flex items-center">
+            <div className="flex items-center z-20">
               {/* Mobile Menu Button - visible only on mobile */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -393,15 +394,23 @@ const Header = () => {
               />
             </div>
 
-            {/* Mobile: Centered Logo | Desktop: Navigation */}
-            {/* Mobile Centered Logo */}
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 xl:hidden">
-              <img 
-                src="/logo.webp" 
-                alt="Girnar Beverages Logo" 
-                className="h-12 w-auto object-contain" 
-              />
-            </div>
+            {/* Mobile: Centered Logo (HIDES when menu open) | Desktop: Hidden */}
+            <AnimatePresence>
+              {!isMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 xl:hidden z-10"
+                >
+                  <img 
+                    src="/logo.webp" 
+                    alt="Girnar Beverages Logo" 
+                    className="h-12 w-auto object-contain" 
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Desktop Navigation */}
             <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium">
@@ -440,7 +449,7 @@ const Header = () => {
             </nav>
 
             {/* Desktop WhatsApp Button */}
-            <div className="flex items-center space-x-2 md:space-x-4">
+            <div className="flex items-center space-x-2 md:space-x-4 z-20">
               <a
                 href="https://wa.me/9177635556"
                 target="_blank"
