@@ -1,7 +1,93 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* src/index.css - Add these animations at the end */
+
+/* ============================================
+   FORCE LIGHT MODE — Prevents dark mode inversion
+   ============================================ */
+:root {
+  color-scheme: light only;
+}
+
+html {
+  color-scheme: light only;
+  background-color: #ffffff;
+}
+
+body {
+  color-scheme: light only;
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Override dark mode on all elements */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light only;
+  }
+
+  html, body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  section {
+    background-color: inherit;
+  }
+
+  /* Force all Tailwind bg-white to stay white */
+  .bg-white {
+    background-color: #ffffff !important;
+  }
+
+  .bg-slate-50 {
+    background-color: #f8fafc !important;
+  }
+
+  .bg-slate-50\/80 {
+    background-color: #f8fafc !important;
+  }
+
+  .bg-slate-800 {
+    background-color: #1e293b !important;
+  }
+
+  /* Force all text colors */
+  .text-slate-800 {
+    color: #1e293b !important;
+  }
+
+  .text-slate-700 {
+    color: #334155 !important;
+  }
+
+  .text-slate-600 {
+    color: #475569 !important;
+  }
+
+  .text-slate-500 {
+    color: #64748b !important;
+  }
+
+  .text-white {
+    color: #ffffff !important;
+  }
+
+  /* Prevent image invert on iOS Safari */
+  img, video, svg, picture {
+    -webkit-user-drag: none;
+    forced-color-adjust: none;
+  }
+}
+
+/* Prevent smart-invert on iOS Safari for images */
+img, video, svg {
+  forced-color-adjust: none;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -28,4 +114,30 @@
 
 .animate-float-slower {
   animation: float-slower 10s ease-in-out infinite;
+}
+
+/* Smooth scroll offset for sticky header */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Prevent layout shift on mobile when menu opens */
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  section#home {
+    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
 }
