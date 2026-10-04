@@ -275,6 +275,7 @@ const MobileSplash = ({ onDismiss }) => {
 };
 
 // ---------- Header ----------
+// ---------- Header ----------
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -292,7 +293,6 @@ const Header = () => {
     { label: 'Contact Us', id: 'contact-us' },
   ];
 
-  // Show splash screen on mobile only (first visit per session)
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
     const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
@@ -361,7 +361,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Mobile Splash Screen */}
       <AnimatePresence>
         {showSplash && <MobileSplash onDismiss={dismissSplash} />}
       </AnimatePresence>
@@ -374,16 +373,38 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Mobile: Center Logo | Desktop: Left Logo */}
-            <div className="flex items-center xl:flex-1 xl:justify-start flex-1 justify-center xl:justify-start">
+            
+            {/* Mobile: Menu button (left) | Desktop: Logo (left) */}
+            <div className="flex items-center">
+              {/* Mobile Menu Button - visible only on mobile */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+                className="xl:hidden p-2 rounded-full hover:bg-slate-100 active:bg-slate-200 transition-colors"
+              >
+                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+              
+              {/* Desktop Logo - visible only on desktop */}
               <img 
                 src="/logo.webp" 
                 alt="Girnar Beverages Logo" 
-                className="h-14 w-auto md:h-16 lg:h-20 object-contain" 
+                className="hidden xl:block h-20 w-auto object-contain" 
               />
             </div>
 
-            <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium relative xl:flex-none">
+            {/* Mobile: Centered Logo | Desktop: Navigation */}
+            {/* Mobile Centered Logo */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 xl:hidden">
+              <img 
+                src="/logo.webp" 
+                alt="Girnar Beverages Logo" 
+                className="h-12 w-auto object-contain" 
+              />
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
                 const isHovered = hoveredLink === link.id;
@@ -418,7 +439,8 @@ const Header = () => {
               })}
             </nav>
 
-            <div className="flex items-center space-x-2 md:space-x-4 xl:flex-1 xl:justify-end">
+            {/* Desktop WhatsApp Button */}
+            <div className="flex items-center space-x-2 md:space-x-4">
               <a
                 href="https://wa.me/9177635556"
                 target="_blank"
@@ -428,13 +450,6 @@ const Header = () => {
                 <MessageCircle className="h-4 w-4" />
                 Order on WhatsApp
               </a>
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
-                className="xl:hidden p-2 rounded-full hover:bg-slate-100 active:bg-slate-200 transition-colors"
-              >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
             </div>
           </div>
         </div>
