@@ -184,11 +184,102 @@ const testimonials = [
 // COMPONENTS
 // ============================================
 
+// ---------- Mobile Splash Screen ----------
+const MobileSplash = ({ onDismiss }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.6, ease: 'easeInOut' }}
+      onClick={onDismiss}
+      onTouchMove={onDismiss}
+      className="fixed inset-0 z-[200] md:hidden bg-gradient-to-br from-cyan-50 via-white to-blue-50 flex flex-col items-center justify-center px-6 overflow-hidden"
+    >
+      {/* Animated Background Blobs */}
+      <motion.div
+        animate={{ scale: [1, 1.2, 1], opacity: [0.35, 0.15, 0.35] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-20 -left-20 w-72 h-72 bg-cyan-300/50 rounded-full blur-3xl"
+      />
+      <motion.div
+        animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.1, 0.3] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        className="absolute bottom-20 -right-20 w-80 h-80 bg-blue-300/50 rounded-full blur-3xl"
+      />
+
+      {/* Floating Droplets */}
+      <motion.div
+        animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-24 right-12 text-cyan-400/60"
+      >
+        <Droplets className="h-8 w-8" fill="currentColor" stroke="none" />
+      </motion.div>
+      <motion.div
+        animate={{ y: [0, 12, 0], rotate: [0, -12, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+        className="absolute bottom-32 left-12 text-blue-400/60"
+      >
+        <Droplets className="h-6 w-6" fill="currentColor" stroke="none" />
+      </motion.div>
+
+      {/* Logo */}
+      <motion.div
+        initial={{ scale: 0.4, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+        className="relative z-10"
+      >
+        <motion.img
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+          src="/logo.webp"
+          alt="Girnar Beverages Logo"
+          className="w-72 h-72 sm:w-80 sm:h-80 object-contain drop-shadow-2xl"
+        />
+      </motion.div>
+
+      {/* Brand Name */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="relative z-10 text-center mt-4"
+      >
+        <h1 className="text-3xl font-bold text-slate-800 tracking-tight">
+          Girnar <span className="text-cyan-700">Beverages</span>
+        </h1>
+        <p className="text-sm text-slate-500 mt-2 font-medium tracking-wide">
+          Pure, Refreshing & Safe Drinking Water
+        </p>
+      </motion.div>
+
+      {/* Tap to Explore */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
+        className="absolute bottom-14 flex flex-col items-center gap-2 text-slate-500"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex flex-col items-center"
+        >
+          <span className="text-xs font-semibold uppercase tracking-[0.2em]">Tap to Explore</span>
+          <ChevronDown className="h-5 w-5 mt-1" />
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 // ---------- Header ----------
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [hoveredLink, setHoveredLink] = useState(null);
+  const [showSplash, setShowSplash] = useState(false);
 
   const navLinks = [
     { label: 'Home', id: 'home' },
@@ -200,6 +291,23 @@ const Header = () => {
     { label: 'About Us', id: 'about-us' },
     { label: 'Contact Us', id: 'contact-us' },
   ];
+
+  // Show splash screen on mobile only (first visit per session)
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
+    
+    if (isMobile && !hasSeenSplash) {
+      setShowSplash(true);
+      document.body.style.overflow = 'hidden';
+    }
+  }, []);
+
+  const dismissSplash = () => {
+    setShowSplash(false);
+    document.body.style.overflow = '';
+    sessionStorage.setItem('hasSeenSplash', 'true');
+  };
 
   useEffect(() => {
     let ticking = false;
@@ -231,9 +339,11 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    if (!showSplash) {
+      document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    }
     return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, showSplash]);
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
@@ -250,127 +360,134 @@ const Header = () => {
   };
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-cyan-100/30 shadow-sm"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Mobile: Center Logo | Desktop: Left Logo */}
-          <div className="flex items-center xl:flex-1 xl:justify-start flex-1 justify-center xl:justify-start">
-            <img 
-              src="/logo.webp" 
-              alt="Girnar Beverages Logo" 
-              className="h-14 w-auto md:h-16 lg:h-20 object-contain" 
-            />
-          </div>
-
-          <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium relative xl:flex-none">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              const isHovered = hoveredLink === link.id;
-              return (
-                <a
-                  key={link.id}
-                  href={`#${link.id}`}
-                  onClick={(e) => handleNavClick(e, link.id)}
-                  onMouseEnter={() => setHoveredLink(link.id)}
-                  onMouseLeave={() => setHoveredLink(null)}
-                  className={`relative px-3 py-2 rounded-lg transition-colors duration-200 ${
-                    isActive ? 'text-cyan-600 font-semibold' : 'text-slate-700 hover:text-cyan-600'
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeSection"
-                      className="absolute left-0 right-0 -bottom-0.5 h-[3px] rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 shadow-[0_0_12px_rgba(6,182,212,0.8)]"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  {!isActive && isHovered && (
-                    <motion.span
-                      layoutId="hoverUnderline"
-                      className="absolute left-2 right-2 -bottom-0.5 h-[2px] rounded-full bg-cyan-300/70"
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </nav>
-
-          <div className="flex items-center space-x-2 md:space-x-4 xl:flex-1 xl:justify-end">
-            <a
-              href="https://wa.me/9177635556"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-emerald-200/50"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Order on WhatsApp
-            </a>
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-              className="xl:hidden p-2 rounded-full hover:bg-slate-100 active:bg-slate-200 transition-colors"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
+    <>
+      {/* Mobile Splash Screen */}
       <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: 'easeInOut' }}
-            className="xl:hidden bg-white border-b border-cyan-100/30 overflow-hidden"
-          >
-            <div className="px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        {showSplash && <MobileSplash onDismiss={dismissSplash} />}
+      </AnimatePresence>
+
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-cyan-100/30 shadow-sm"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Mobile: Center Logo | Desktop: Left Logo */}
+            <div className="flex items-center xl:flex-1 xl:justify-start flex-1 justify-center xl:justify-start">
+              <img 
+                src="/logo.webp" 
+                alt="Girnar Beverages Logo" 
+                className="h-14 w-auto md:h-16 lg:h-20 object-contain" 
+              />
+            </div>
+
+            <nav className="hidden xl:flex items-center space-x-1 text-sm font-medium relative xl:flex-none">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
+                const isHovered = hoveredLink === link.id;
                 return (
                   <a
                     key={link.id}
                     href={`#${link.id}`}
                     onClick={(e) => handleNavClick(e, link.id)}
-                    className={`relative flex items-center justify-between px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
-                      isActive ? 'text-cyan-700 bg-cyan-50' : 'text-slate-700 active:bg-slate-100'
+                    onMouseEnter={() => setHoveredLink(link.id)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    className={`relative px-3 py-2 rounded-lg transition-colors duration-200 ${
+                      isActive ? 'text-cyan-600 font-semibold' : 'text-slate-700 hover:text-cyan-600'
                     }`}
                   >
-                    <span className="flex items-center gap-3">
-                      {isActive && <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.9)]" />}
-                      {link.label}
-                    </span>
+                    {link.label}
                     {isActive && (
-                      <span className="text-[10px] uppercase tracking-wider font-bold text-cyan-600 bg-cyan-100 px-2 py-0.5 rounded-full">
-                        Now
-                      </span>
+                      <motion.span
+                        layoutId="activeSection"
+                        className="absolute left-0 right-0 -bottom-0.5 h-[3px] rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 shadow-[0_0_12px_rgba(6,182,212,0.8)]"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    {!isActive && isHovered && (
+                      <motion.span
+                        layoutId="hoverUnderline"
+                        className="absolute left-2 right-2 -bottom-0.5 h-[2px] rounded-full bg-cyan-300/70"
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      />
                     )}
                   </a>
                 );
               })}
+            </nav>
 
+            <div className="flex items-center space-x-2 md:space-x-4 xl:flex-1 xl:justify-end">
               <a
                 href="https://wa.me/9177635556"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white px-4 py-3 rounded-xl text-sm font-medium transition-all w-full justify-center mt-3 shadow-md"
+                className="hidden md:inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-emerald-200/50"
               >
                 <MessageCircle className="h-4 w-4" />
                 Order on WhatsApp
               </a>
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+                className="xl:hidden p-2 rounded-full hover:bg-slate-100 active:bg-slate-200 transition-colors"
+              >
+                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.28, ease: 'easeInOut' }}
+              className="xl:hidden bg-white border-b border-cyan-100/30 overflow-hidden"
+            >
+              <div className="px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.id;
+                  return (
+                    <a
+                      key={link.id}
+                      href={`#${link.id}`}
+                      onClick={(e) => handleNavClick(e, link.id)}
+                      className={`relative flex items-center justify-between px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+                        isActive ? 'text-cyan-700 bg-cyan-50' : 'text-slate-700 active:bg-slate-100'
+                      }`}
+                    >
+                      <span className="flex items-center gap-3">
+                        {isActive && <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.9)]" />}
+                        {link.label}
+                      </span>
+                      {isActive && (
+                        <span className="text-[10px] uppercase tracking-wider font-bold text-cyan-600 bg-cyan-100 px-2 py-0.5 rounded-full">
+                          Now
+                        </span>
+                      )}
+                    </a>
+                  );
+                })}
+
+                <a
+                  href="https://wa.me/9177635556"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white px-4 py-3 rounded-xl text-sm font-medium transition-all w-full justify-center mt-3 shadow-md"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Order on WhatsApp
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </>
   );
 };
 
