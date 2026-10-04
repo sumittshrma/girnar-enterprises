@@ -406,7 +406,7 @@ const Header = () => {
                   <img 
                     src="/logo.webp" 
                     alt="Girnar Beverages Logo" 
-                    className="h-12 w-auto object-contain" 
+                    className="h-16 w-auto object-contain" 
                   />
                 </motion.div>
               )}
