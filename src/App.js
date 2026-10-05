@@ -1144,7 +1144,7 @@ const Contact = () => {
 
           <motion.div initial={{ x: 30, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <a href="tel:+9177635556" className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-cyan-100/40 shadow-lg hover:shadow-xl transition-all">
+              <a href="tel:+919177635556" className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-cyan-100/40 shadow-lg hover:shadow-xl transition-all">
                 <Phone className="h-8 w-8 text-cyan-700" />
                 <span className="text-sm font-medium text-slate-700 mt-2">Call Us</span>
               </a>
@@ -1303,7 +1303,7 @@ const Footer = () => {
             <ul className="space-y-2 text-slate-400">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-sky-400" />
-                <span>WhatsApp / Main: <a href="https://wa.me/9177635556" className="hover:text-white">+91 77635 5556</a></span>
+                <span>WhatsApp / Main: <a href="https://wa.me/9177635556" className="hover:text-white">+91 91776 35556</a></span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-sky-400" />
@@ -1311,7 +1311,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-sky-400" />
-                <span>Support: <a href="tel:+9177635556" className="hover:text-white">+91 77635 5556</a></span>
+                <span>Support: <a href="tel:+919177635556" className="hover:text-white">+91 91776 35556</a></span>
               </li>
             </ul>
           </div>
