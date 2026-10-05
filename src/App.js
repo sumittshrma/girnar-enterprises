@@ -921,7 +921,7 @@ const CustomLabeling = () => {
                 Enquire Custom Stickers
               </a>
 
-              <p className="text-xs text-slate-400 mt-4">Minimum order: 100 bottles · Delivery in 5-7 working days</p>
+              <p className="text-xs text-slate-400 mt-4">Minimum order: 100 crates · Delivery in 5-7 working days</p>
             </div>
 
             <div className="flex justify-center">
